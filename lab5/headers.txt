@@ -1,0 +1,13 @@
+HTTP/1.1 201 Created
+Allow: GET, HEAD, POST
+OData-Version: 4.0
+X-Auth-Token: S2ScdczQ94uXk1QItGiT
+Location: /redfish/v1/SessionService/Sessions/jJzyaRRMyu
+Strict-Transport-Security: max-age=31536000; includeSubdomains
+Pragma: no-cache
+Cache-Control: no-store, max-age=0
+X-Content-Type-Options: nosniff
+Content-Type: application/json
+Date: Sun, 16 Mar 2025 10:17:22 GMT
+Content-Length: 299
+
