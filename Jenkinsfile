@@ -5,7 +5,7 @@ pipeline{
 		stage('prepair'){
 			steps{
 				echo 'start download'
-				sh 'sudo apt install qemu-system-arm'
+				sh 'apt-get install qemu-system-arm'
 				echo 'end download'
 			}
 		}
