@@ -1,9 +1,5 @@
 pipeline{
-	agent{
-		node{
-			label 'Мастер'
-		}
-	}
+	agent any
 	
 	stages{
 		stage('prepair'){
