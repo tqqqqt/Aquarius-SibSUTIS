@@ -5,7 +5,8 @@ pipeline{
 		stage('prepair'){
 			steps{
 				echo 'start download'
-				sh 'sudo apt-get install qemu-system-arm'
+				sh 'whoami'
+				sh 'ls'
 				echo 'end download'
 			}
 		}
