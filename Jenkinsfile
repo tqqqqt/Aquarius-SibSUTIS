@@ -1,7 +1,7 @@
 pipeline{
 	agent{
 		node{
-			label 'jens-qemu'
+			label 'my-label1'
 		}
 	}
 	
