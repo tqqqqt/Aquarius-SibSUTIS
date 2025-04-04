@@ -4,7 +4,7 @@ pipeline{
 			label 'jens-qemu'
 		}
 	}
-	environment{ }
+	
 	stages{
 		stage('prepair'){
 			steps{
