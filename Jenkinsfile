@@ -3,10 +3,15 @@ pipeline{
 	
 	stages{
 		stage('prepair'){
+			agent{
+				docker{
+					image 'hello-world'
+				}
+			}
 			steps{
 				echo 'start download'
-				sh 'whoami'
-				sh 'ls'
+				//sh 'whoami'
+				//sh 'ls'
 				echo 'end download'
 			}
 		}
