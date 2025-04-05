@@ -4,7 +4,7 @@ pipeline{
 	stages{
 		stage('prepair'){
 			agent{
-				docker{
+				dockerContainer{
 					image 'hello-world'
 				}
 			}
