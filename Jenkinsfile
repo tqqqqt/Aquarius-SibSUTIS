@@ -18,8 +18,9 @@ pipeline{
 						script: 'find /romulus -name *.static.mtd',
 						returnStdout: true).trim()
 					env.FILE_PATH=find_result
+					def qemu_comand= 'qemu-system-arm -m 256 -M romulus-bmc -drive file=${env.FILE_PATH},format=raw, if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu -daemonize'
+					sh(qume_comand)
 				}
-				def qemu_comand= 'qemu-system-arm -m 256 -M romulus-bmc -drive file=${env.FILE_PATH},format=raw, if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu -daemonize'
 				echo 'end build'
 			}
 		}
