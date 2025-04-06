@@ -5,7 +5,7 @@ pipeline{
 		stage('download_openbmc_image'){
 			steps{
 				echo 'start download'
-				sh 'wget --progress=dot -e dotbytes=10M https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
+				sh 'wget -nv https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
  				sh 'unzip -o romulus.zip'
  				echo 'end download'
 			}
@@ -32,6 +32,11 @@ pipeline{
 				sh "ls"
 				echo "end tests"
 			}
+		}
+	}
+	post{
+		always{
+			sh "rm romuluz.zip"
 		}
 	}
 }
