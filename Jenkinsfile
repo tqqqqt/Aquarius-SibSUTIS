@@ -30,8 +30,12 @@ pipeline{
 		stage('tests'){
 			steps{
 				echo "start tests"
-				sh "pwd"
-				sh "ls"
+				echo "web test:"
+				sh "pytest lab4/tests.py"
+				echo "redfish test:"
+				echo "---"
+				echo "locust test:"
+				echo "---"
 				echo "end tests"
 			}
 		}
