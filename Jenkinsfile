@@ -22,7 +22,7 @@ pipeline{
 					def qemu_comand="nohup qemu-system-arm -m 256 -M romulus-bmc -nographic -drive file=${env.FILE_PATH},format=raw,if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu > qemu.log 2>&1 &"
 					echo "comand - ${qemu_comand}"
 					sh(qemu_comand)
-					sleep 60
+					sleep 180
 				}
 				echo 'end build'
 			}
