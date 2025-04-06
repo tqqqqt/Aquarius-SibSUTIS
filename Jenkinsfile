@@ -30,10 +30,10 @@ pipeline{
 		stage('tests'){
 			steps{
 				echo "start tests"
+				echo "redfish test:"
+				sh "pytest lab5/test_redfish.py"
 				echo "web test:"
 				sh "pytest lab4/tests.py"
-				echo "redfish test:"
-				echo "---"
 				echo "locust test:"
 				echo "---"
 				echo "end tests"
