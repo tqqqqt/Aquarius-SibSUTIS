@@ -19,7 +19,7 @@ pipeline{
 						returnStdout: true).trim()
 					env.FILE_PATH=find_result
 					echo "file - ${env.FILE_PATH}"
-					def qemu_comand="qemu-system-arm -m 256 -M romulus-bmc -drive file=${env.FILE_PATH},format=raw, if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu -daemonize"
+					def qemu_comand="qemu-system-arm -m 256 -M romulus-bmc -drive file=${env.FILE_PATH},format=raw,if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu -daemonize"
 					sh(qemu_comand)
 				}
 				echo 'end build'
@@ -27,8 +27,10 @@ pipeline{
 		}
 		stage('tests'){
 			steps{
-				echo 'start tests'
-				echo 'end tests'
+				echo "start tests"
+				sh "pwd"
+				sh "ls"
+				echo "end tests"
 			}
 		}
 	}
