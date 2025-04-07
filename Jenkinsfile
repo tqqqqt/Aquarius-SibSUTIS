@@ -23,7 +23,7 @@ pipeline{
 					def exit_flg=1
 					while(exit_flg>0){
 						def start_qemu=sh(
-							script: 'grep -c "Started Hostname Service" qemu.log || true',
+							script: 'grep -c "romulus login" qemu.log || true',
 							returnStdout: true).trim()
 						if(start_qemu=="1"){
 							exit_flg=0
@@ -33,13 +33,9 @@ pipeline{
 							sleep 15
 						}
 					}
+					sleep 30
 				}
 				echo 'end build'
-			}
-		}
-		stage('connect tests'){
-			steps{
-				sh "curl -v "
 			}
 		}
 		stage('python tests'){
