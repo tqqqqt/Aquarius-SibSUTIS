@@ -33,7 +33,7 @@ pipeline{
 							sleep 15
 						}
 					}
-					sleep 30
+					sleep 40
 				}
 				echo 'end build'
 			}
@@ -46,7 +46,7 @@ pipeline{
 				echo "web test:"
 				//sh "pytest lab4/tests.py"
 				echo "locust test:"
-				sh "locust --headles -f lab6/locustfile.py --host abs -u 30 -r 2 --run-time 60 -E json_posts"
+				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 5 --run-time 60 -E json_posts"
 				echo "end tests"
 			}
 		}
