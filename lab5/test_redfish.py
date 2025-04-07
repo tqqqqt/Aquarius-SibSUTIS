@@ -31,13 +31,17 @@ def test_incorect_login(openbmc_url):
 	assert curent_result==need_result
 
 def test_system_check(openbmc_url):
+	login={"UserName":"root", "Password":"0penBmc"}
+	headers={"X-Auth-Token":"", "Content-Type":"application/json"}
 	curent_code_result=-1
 	curent_json_result=' '
 	need_code_result=200
 	need_json_result_1="Status"
 	need_json_result_2="PowerState"
 
-	response=requests.get(f"{openbmc_url}/redfish/v1/Systems/system",auth=("root","0penBmc"),verify=ssl.CERT_NONE)
+	response=requests.post(f"{openbmc_url}/redfish/v1/SessionService/Sessions",json=login,verify=ssl.CERT_NONE)
+	headers["X-Auth-Token"]=response.headers.get("X-Auth-Token")
+	response=requests.get(f"{openbmc_url}/redfish/v1/Systems/system",headers=headers,verify=ssl.CERT_NONE)
 	curent_code_result=response.status_code
 	curent_json_result=response.json()
 
@@ -60,7 +64,7 @@ def test_power_control(openbmc_url):
 	headers["X-Auth-Token"]=response.headers.get("X-Auth-Token")
 	response=requests.post(f"{openbmc_url}/redfish/v1/Systems/system/Actions/ComputerSystem.Reset",headers=headers,json=payload,verify=ssl.CERT_NONE)
 	curent_code_result_1=response.status_code
-	response=requests.get(f"{openbmc_url}/redfish/v1/Systems/system",auth=(login["UserName"],login["Password"]),verify=ssl.CERT_NONE)
+	response=requests.get(f"{openbmc_url}/redfish/v1/Systems/system",headers=headers,verify=ssl.CERT_NONE)
 	curent_code_result_2=response.status_code
 	curent_json_result=response.json()['PowerState']
 
