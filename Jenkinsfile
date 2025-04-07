@@ -25,9 +25,10 @@ pipeline{
 					def exit_flg=1
 					while(exit_flg>0){
 						def start_qemu=sh(
-							script: 'grep -c "romulus login" qemu.log',
+							script: 'grep -c "romulus login" qemu.log || true',
 							returnStdout: true).trim()
-						if(start_qemu=='1'){
+						echo "grep - ${start_qemu}"
+						if(start_qemu=="1"){
 							exit_flg=0
 							break
 						}
