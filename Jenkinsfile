@@ -49,7 +49,7 @@ pipeline{
 				echo "web test:"
 				sh "pytest lab4/tests.py"
 				echo "locust test:"
-				sh "locust --headles -f lab6/locustfile.py --host abs -u 30 -r 2 --run-time 60"
+				sh "locust --headles -f lab6/locustfile.py --host abs -u 30 -r 2 --run-time 60 -E json_posts"
 				echo "end tests"
 			}
 		}
