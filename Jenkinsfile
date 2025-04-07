@@ -22,14 +22,18 @@ pipeline{
 					def qemu_comand="nohup qemu-system-arm -m 256 -M romulus-bmc -nographic -drive file=${env.FILE_PATH},format=raw,if=mtd -net nic -net user,hostfwd=:0.0.0.0:2222-:22,hostfwd=:0.0.0.0:2443-:443,hostfwd=udp:0.0.0.0:2623-:623,hostname=qemu > qemu.log 2>&1 &"
 					echo "comand - ${qemu_comand}"
 					sh(qemu_comand)
-					while(1){
+					def exit_flg=1
+					while(exit_flg>0){
 						def start_qemu=sh(
 							script: 'grep -c "romulus login" qemu.log',
 							returnStdout: true).trim()
 						if(start_qemu=='1'){
+							exit_flg=0
 							break
 						}
-						sleep 15
+						else {
+							sleep 15
+						}
 					}
 					//sleep 180
 				}
