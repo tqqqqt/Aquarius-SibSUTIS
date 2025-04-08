@@ -13,7 +13,7 @@ pipeline{
 		stage('build'){
 			steps{
 				echo '-----start build-----'
-				sh 'mkdir reports'
+				sh 'mkdir -p reports'
 				script{
 					def find_result=sh(
 						script: 'find romulus/ -name *.static.mtd',
