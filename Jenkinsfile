@@ -53,10 +53,9 @@ pipeline{
 	}
 	post{
 		always{
-			archiveArtifacts artifacts: 'report/*.xml', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
-			archiveArtifacts artifacts: 'report/*.csv', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
+			archiveArtifacts artifacts: 'reports/*.xml', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
+			archiveArtifacts artifacts: 'reports/*.csv', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
 			junit 'reports/*.xml'
-			junit 'reports/*.csv'
 			sh "rm -f -r romulus"
 			sh "rm -f romulus.zip"
 			sh "rm -f qemu.log"
