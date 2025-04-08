@@ -53,6 +53,8 @@ pipeline{
 	}
 	post{
 		always{
+			archiveArtifacts artifacts: './*.jar', fingerprint: true
+			junit './*.xml'
 			sh "rm -f -r romulus"
 			sh "rm -f romulus.zip"
 			sh "rm -f qemu.log"
