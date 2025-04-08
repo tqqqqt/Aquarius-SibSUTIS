@@ -4,15 +4,15 @@ pipeline{
 	stages{
 		stage('download_openbmc_image'){
 			steps{
-				echo 'start download'
-				//sh 'wget -nv https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
+				echo '-----start download-----'
+				sh 'wget -nv https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
  				sh 'unzip -o romulus.zip'
- 				echo 'end download'
+ 				echo '-----end download-----'
 			}
 		}
 		stage('build'){
 			steps{
-				echo 'start build'
+				echo '-----start build-----'
 				script{
 					def find_result=sh(
 						script: 'find romulus/ -name *.static.mtd',
@@ -35,19 +35,19 @@ pipeline{
 					}
 					sleep 40
 				}
-				echo 'end build'
+				echo '-----end build-----'
 			}
 		}
 		stage('python tests'){
 			steps{
-				echo "start tests"
-				echo "redfish test:"
+				echo "-----start tests-----"
+				echo "* redfish test:"
 				sh "pytest lab5/test_redfish.py"
-				echo "web test:"
+				echo "* web test:"
 				sh "pytest lab4/tests.py"
-				echo "locust test:"
+				echo "* locust test:"
 				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts"
-				echo "end tests"
+				echo "-----end tests-----"
 			}
 		}
 	}
@@ -55,6 +55,7 @@ pipeline{
 		always{
 			sh "rm -f -r romulus"
 			sh "rm -f romulus.zip"
+			sh "rm -f qemu.log"
 		}
 	}
 }
