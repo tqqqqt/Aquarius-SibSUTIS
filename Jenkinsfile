@@ -46,7 +46,7 @@ pipeline{
 				echo "* web test:"
 				sh "pytest lab4/tests.py --junitxml=reports/result_lab4.xml"
 				echo "* locust test:"
-				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts --csv report/locust"
+				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts --csv reports/locust"
 				echo "-----end tests-----"
 			}
 		}
@@ -55,8 +55,8 @@ pipeline{
 		always{
 			archiveArtifacts artifacts: 'report/*.xml', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
 			archiveArtifacts artifacts: 'report/*.csv', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
-			junit 'report/*.xml'
-			junit 'report/*.csv'
+			junit 'reports/*.xml'
+			junit 'reports/*.csv'
 			sh "rm -f -r romulus"
 			sh "rm -f romulus.zip"
 			sh "rm -f qemu.log"
