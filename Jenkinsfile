@@ -5,7 +5,7 @@ pipeline{
 		stage('download_openbmc_image'){
 			steps{
 				echo 'start download'
-				sh 'wget -nv https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
+				//sh 'wget -nv https://jenkins.openbmc.org/job/ci-openbmc/lastSuccessfulBuild/distro=ubuntu,label=docker-builder,target=romulus/artifact/openbmc/build/tmp/deploy/images/romulus/*zip*/romulus.zip'
  				sh 'unzip -o romulus.zip'
  				echo 'end download'
 			}
@@ -46,7 +46,7 @@ pipeline{
 				echo "web test:"
 				sh "pytest lab4/tests.py"
 				echo "locust test:"
-				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 5 --run-time 60 -E json_posts"
+				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts"
 				echo "end tests"
 			}
 		}
