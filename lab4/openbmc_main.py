@@ -17,6 +17,15 @@ def startWork(_adress):
 	if driver!=None:
 		driver.quit()
 
+	chromedriver_path="/bin/chromedriver"
+
+	options=webdriver.ChromeOptions()
+	options.add_argument('headless')
+	options.add_argument('--ignore-certificate-errors')
+	options.add_argument('--ignore-ssl-errors')
+	options.add_argument('--disable-blink-features=AutomationControlled')
+	service=ChromeService(executable_path=chromedriver_path)
+
 	driver=webdriver.Chrome(service=service,options=options)
 	driver.get(_adress)
 
@@ -49,15 +58,3 @@ def getTitle():
 		return
 
 	return driver.title
-
-
-#-------------------------------
-# defines 2
-chromedriver_path="/usr/bin/chromedriver"
-
-options=webdriver.ChromeOptions()
-options.add_argument('headless')
-options.add_argument('--ignore-certificate-errors')
-options.add_argument('--ignore-ssl-errors')
-options.add_argument('--disable-blink-features=AutomationControlled')
-service=ChromeService(executable_path=chromedriver_path)
