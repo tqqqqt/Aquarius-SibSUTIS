@@ -42,19 +42,21 @@ pipeline{
 			steps{
 				echo "-----start tests-----"
 				echo "* redfish test:"
-				sh "pytest lab5/test_redfish.py"
+				sh "pytest lab5/test_redfish.py --junitxml=reports/result_lab5.xml"
 				echo "* web test:"
-				sh "pytest lab4/tests.py"
+				sh "pytest lab4/tests.py --junitxml=reports/result_lab4.xml"
 				echo "* locust test:"
-				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts"
+				sh "locust --headles -f lab6/locustfile.py --host abs -u 10 -r 1 --run-time 60 -E json_posts --csv report/locust"
 				echo "-----end tests-----"
 			}
 		}
 	}
 	post{
 		always{
-			archiveArtifacts artifacts: './*.jar', fingerprint: true
-			junit './*.xml'
+			archiveArtifacts artifacts: 'report/*.xml', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
+			archiveArtifacts artifacts: 'report/*.csv', allowEmptyArchive: true, followSymlinks: false, fingerprint: true
+			junit 'report/*.xml'
+			junit 'report/*.csv'
 			sh "rm -f -r romulus"
 			sh "rm -f romulus.zip"
 			sh "rm -f qemu.log"
