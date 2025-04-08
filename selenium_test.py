@@ -11,6 +11,7 @@ options.add_argument('headless')
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument('--disable-blink-features=AutomationControlled')
+options.add_argument('--disable-dev-shm-usage')
 service=ChromeService(executable_path=chromedriver_path)
 
 driver=webdriver.Chrome(service=service,options=options)
