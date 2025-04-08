@@ -54,7 +54,7 @@ def loginServer(_user_name, _user_pass):
 	enter_button.click()
 
 	# need wait to update page
-	time.sleep(5)
+	time.sleep(10)
 
 def getTitle():
 	global driver
